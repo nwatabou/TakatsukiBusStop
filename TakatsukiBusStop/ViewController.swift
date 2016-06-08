@@ -35,7 +35,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let Nonstop = 2
     let CoreTimeOnly = 3
     
+    let next = 1
+    let afterNext = 2
+    
     var fileName = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -194,14 +198,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             for i in 0 ..< result.count{
                 if(result[i][Hour] == nowHour){
-                    if(result[i][Minute] > nowMinute){
+                    if(result[i][Minute] >= nowMinute){
                         self.firstTimeLabel.text = result[i][Hour]+":"+result[i][Minute]
-
-                        //直行便
-                        if(result[i][Nonstop] == "t"){
-
-                        }
-                        break
+                        self.secondTimeLabel.text = result[i+next][Hour]+":"+result[i+next][Minute]
+                    }else{
+                        self.firstTimeLabel.text = result[i][Hour]+":"+result[i][Minute]
+                        self.secondTimeLabel.text = result[i+afterNext][Hour]+":"+result[i+afterNext][Minute]
                     }
                 }
             }
